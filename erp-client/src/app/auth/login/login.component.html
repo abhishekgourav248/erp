@@ -1,0 +1,26 @@
+<div class="auth-container">
+    <div class="auth-container-col-1">
+        <img src="../../../assets/logo/Logo.svg" alt="" class="logo"><span class="logo-text">ORK flo</span>
+        <img src="../../../assets/logo/Logo.svg" alt="" class="logo logo-reverse">
+    </div>
+    <div class="auth-container-col-2">
+        <div class="auth-form-box flex-vertical flex-vertical-center">
+            <div class="auth-header">
+                Login
+            </div>
+            <form class="auth-form login">
+                <div class="row flex-vertical">
+                    <label class="input-label" for="">User Id</label>
+                    <input class="input-field" type="text" [name]="'user_id'" placeholder="User Id..." (input) = "handleChange($event)">
+                </div>
+                <div class="row flex-vertical">
+                    <label class="input-label" for="">Password</label>
+                    <input class="input-field" type="passowrd" [name]="'password'" placeholder="Password..." (input) = "handleChange($event)">
+                </div>
+                <div class="row">
+                    <button class="auth-button" type="button" (click)="handleSubmit()">Sign In</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

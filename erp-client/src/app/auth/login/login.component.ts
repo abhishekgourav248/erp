@@ -29,7 +29,7 @@ export class LoginComponent {
             if(data.status) {
               localStorage.setItem('user_id' , data.data.user_id);
               localStorage.setItem('token' , data.data._token);
-              // this.router.navigate(['dashboard']);
+              this.router.navigate(['dashboard']);
             }else {
               alert(data.error);
             }

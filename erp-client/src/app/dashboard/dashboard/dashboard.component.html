@@ -1,1 +1,39 @@
-<p>dashboard works!</p>
+<header class="header flex flex-align-center">
+    <img src="../../../assets/logo/Logo.svg" alt="" class="brand-logo">
+    <div class="header-main"></div>
+    <img src="https://lh3.googleusercontent.com/a/ACg8ocInXdcl3v2mRR6VotA81uRplp0N2uzd6x9GTy2bNP-pVtg=s288-c-no" alt="" class="header-user-logo">
+</header>
+
+<div class="container flex">
+    <div class="side-bar">
+        <ul class="nav">
+            <li class="nav-item flex">
+                <div class="nav-logo nav-active">
+                    <i class="fa-solid fa-house dashboard-icon"></i>
+                </div>
+                <div class="nav-text">Dashboard</div>
+            </li>
+            <li class="nav-item flex">
+                <div class="nav-logo">
+                    <i class="fa-solid fa-clipboard-user dashboard-icon"></i>
+                </div>
+                <div class="nav-text">Attendance</div>
+            </li>
+            <li class="nav-item flex">
+                <div class="nav-logo">
+                    <i class="fa-solid fa-calendar-check dashboard-icon"></i>
+                </div>
+                <div class="nav-text">Time sheets</div>
+            </li>
+            <li class="nav-item flex">
+                <div class="nav-logo">
+                    <i class="fa-solid fa-suitcase-rolling dashboard-icon"></i>
+                </div>
+                <div class="nav-text">Leave</div>
+            </li>
+        </ul>
+    </div>
+    <div class="main">
+        <router-outlet></router-outlet>
+    </div>
+</div>

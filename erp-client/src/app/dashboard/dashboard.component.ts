@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import axios from 'axios';
-import { env } from '../../../env';
+import { env } from '../../env';
 import { Router } from '@angular/router';
+import { UserdataService } from '../services/userdata.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,31 +14,22 @@ export class DashboardComponent implements OnInit {
   userDetails : any ;
   payload:any;
   baseURL : string;
-  data:any;
   userId:string | null;
   token:string | null;
+  data : any;
   //Initializations
-  constructor (private router : Router) {
+  constructor (private router : Router , private userService : UserdataService) {
     this.payload= {};
     this.baseURL = env.apiURL;
     this.userId = localStorage.getItem('user_id');
     this.token = localStorage.getItem('token');
-  }
-  ngOnInit(): void {
     if(this.userId == null || this.token == null) {
       //redirect to login page with query params error 401 unauthenticated...
     }
-    axios.get(`${this.baseURL}/get_user_details`,{
-      params : {
-        user_id : this.userId
-      },
-      headers: {
-        Authorization : `Bearer ${this.token}`
-      }
-    }).then((res) => {
-      
-    }).catch((err) => {
-      console.error(err)
+  }
+  ngOnInit(): void {
+    this.userService.setUserData().subscribe(data => {
+      this.data = data;
     })
   }
 }

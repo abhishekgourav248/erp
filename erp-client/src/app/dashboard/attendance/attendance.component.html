@@ -1,0 +1,31 @@
+<div class="attendance-container">
+    <div class="attendance-header">
+        Attendance
+    </div>
+    <div class="attendance-nav-bar">
+        <ul class="attendance-nav-list">
+            <li class="attendance-nav-item" [class.nav-active]="toggleTab == 1" (click)="toggleTab = 1;">Check In/Out</li>
+            <li class="attendance-nav-item" [class.nav-active]="toggleTab == 2" (click)="toggleTab = 2;loadAttendance()">View Attendance</li>
+        </ul>
+    </div>
+    <div class="attendance-main">
+        <div class="check-in-out-panel show-panel" *ngIf="toggleTab == 2">
+            <img src={{user.profile_image}} alt="" class="profile-image">
+            <div class="user-name">{{user.name}}</div>
+            <div>Welcome</div>
+            <div class="check-in-btn" *ngIf="user.is_checked_in == 2 ;" (click) = "handleToggleCheckIn()">
+                <i class="fa-solid fa-arrow-right-to-bracket fa-check-in-out"></i>      
+                <span>
+                    Check-In
+                </span>
+            </div>
+            <div class="check-out-btn"  *ngIf="user.is_checked_in == 1 ;" (click) = "handleToggleCheckIn()">
+                <i class="fa-solid fa-arrow-right-from-bracket fa-check-in-out"></i>
+                <span>
+                    Check-out
+                </span>
+            </div>
+        </div>
+        <app-view-attendance *ngIf="toggleTab == 1"></app-view-attendance>
+    </div>
+</div>

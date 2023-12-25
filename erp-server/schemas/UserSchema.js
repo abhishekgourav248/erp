@@ -37,7 +37,12 @@ const userSchema = new mongoose.Schema({
     user_type : {
         type : Number,
         default : 2,
-        comment : "1 - Admin / 2 - Employee / 3 - HR"
+        description : "1 - Admin / 2 - Employee / 3 - HR"
+    },
+    is_checked_in : {
+        type : Number,
+        default : 2,
+        description : "1 - > yes / 2 - > no"
     }
 })
 

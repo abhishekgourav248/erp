@@ -9,7 +9,7 @@
         </ul>
     </div>
     <div class="attendance-main">
-        <div class="check-in-out-panel show-panel" *ngIf="toggleTab == 2">
+        <div class="check-in-out-panel show-panel" *ngIf="toggleTab == 1">
             <img src={{user.profile_image}} alt="" class="profile-image">
             <div class="user-name">{{user.name}}</div>
             <div>Welcome</div>
@@ -26,6 +26,6 @@
                 </span>
             </div>
         </div>
-        <app-view-attendance *ngIf="toggleTab == 1"></app-view-attendance>
+        <app-view-attendance *ngIf="toggleTab == 2"></app-view-attendance>
     </div>
 </div>

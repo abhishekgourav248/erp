@@ -14,7 +14,7 @@ const authenticate = async (req,res,next) => {
     try {
         const token = (rawToken.split(" "))[1];
         const decodedToken = Jwt.verify(token , KEY);
-        const userId = req.query.user_id;
+        const userId = req.body.hasOwnProperty('user_id') ? req.body.user_id : req.query.user_id;
         if(!userId) {
             response = {status : false , error : "user_id field is required" , errCode : 1001};
             return res.status(200).json(response);
@@ -31,11 +31,6 @@ const authenticate = async (req,res,next) => {
 
         if(isTokenExpired) {
             return res.status(401).json({error : "Unauthorized - Token expired. Please login to continue"});
-        }
-        
-        if(req.query) {
-            req.body = {...req.query};
-            delete req.query;
         }
 
         next() ;

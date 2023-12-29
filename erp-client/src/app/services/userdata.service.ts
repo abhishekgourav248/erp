@@ -95,7 +95,7 @@ export class UserdataService {
 
   private postData(payload :any , headers:any): Observable<any> {
     return new Observable<any>((observer) => {
-      axios.post(`${this.baseURL}/update_user_details`,payload, {headers}).then((res) => {
+      axios.post(`${this.baseURL}/upsert_user_attendance`,payload, {headers}).then((res) => {
         const {status} = res.data;
         if(status) {
           observer.next(res.data.data);

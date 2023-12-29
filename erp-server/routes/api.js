@@ -1,6 +1,7 @@
 import express from "express";
 import * as AuthController from "../controllers/AuthController.js";
 import * as UserController from "../controllers/UserController.js";
+import * as AttendanceController from "../controllers/AttendanceController.js";
 import authenticate from "../middlewares/Authenticate.js";
 
 const router = express.Router();
@@ -12,6 +13,6 @@ router.get('/get_user_attendance_list',authenticate,UserController.getUserAttend
 //post routes -----------------------------------------------------------------------------------------------------------------------------------------
 router.post("/login",AuthController.loginUser);
 router.post("/register",AuthController.registerUser);
-router.post("/update_user_details",authenticate,UserController.updateUserDetails);
+router.post("/upsert_user_attendance",authenticate,AttendanceController.upsertUserAttendence);
 
 export default router;

@@ -22,7 +22,7 @@ export const getUserDetails  = async (userId, forAuthentication = false) => {
             }
             response = {status : true , data : user};
         }else {
-            response = {status : false , error : "User not found.   " , errCode : 1002}
+            response = {status : false , error : "User not found.   " , errCode : 1002 , code : 500}
         }
     }catch(error) {
         response = {status :false , msg : error, code : 500}
@@ -31,17 +31,17 @@ export const getUserDetails  = async (userId, forAuthentication = false) => {
 }
 
 
-export const updateUserDetails = async (postData) => {
+export const updateUserAttendence = async (postData) => {
     let response = {};
     let options = {
-        returnDocument : 'after'
+        new:true
     }
     try {
-        const updateUser = await User.findOneAndUpdate({user_id : postData.user_id} , {profile_image : postData.profile_image , is_checked_in : postData.is_checked_in , user_type : postData.user_type , name : postData.name},options);
+        const updateUser = await User.findOneAndUpdate({user_id : postData.user_id} , {is_checked_in : postData.is_checked_in},options);
         if(!updateUser) {
             response = {status :false , error : "Failed to update. Data may not exist",code : 200 , errCode : 1004}
         }else {
-            response = {status : true , data : updateUser , msg : "User updated successfully" , code : 200}
+            response = {status : true , data : updateUser , msg : "Attendance updated successfully" , code : 200}
         }
     }catch (error) {
         response = {status :false , code : 500 , error : error.message ,msg : "Something went wrong" }

@@ -3,7 +3,6 @@ import Jwt from "jsonwebtoken";
 import UserToken from "../schemas/UserTokens.js";
 import { response } from "express";
 
-
 export const generateRandomToken =async ()=> {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let randomString = '';
@@ -52,4 +51,30 @@ export const generateJWT = async (userId) => {
         response = {status : false, error : "Something went wrong", code : 500};
     }
     return response;
+}
+/**
+ * @param formatType 1 - YYYY-MM-DD , 2 -> MM-DD-YYYY , 3 -> DD-MM-YYYY
+ * @default YYYY-MM-DD
+ * @returns string
+ */
+export const getDate = (formatType=1) => {
+    // Get today's date
+    const today = new Date();
+
+    // Get the year, month, and day
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1; // Month is zero-based
+    const day = today.getDate();
+
+    // Create a formatted string
+    const date_ymd = `${year}/${month < 10 ? '0' : ''}${month}/${day < 10 ? '0' : ''}${day}`; // YYYY-MM-DD
+    const date_mdy = `${month < 10 ? '0' : ''}${month}/${day < 10 ? '0' : ''}${day}/${year}`; // MM-DD-YYYY
+    const date_dmy = `${day < 10 ? '0' : ''}${day}/${month < 10 ? '0' : ''}${month}/${year}`; // DD-MM-YYYY
+
+    switch (formatType) {
+        case 1  : return date_ymd;
+        case 2  : return date_mdy;
+        case 3  : return date_dmy;
+        default : return date_ymd;
+    }
 }

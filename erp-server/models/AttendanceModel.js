@@ -1,6 +1,7 @@
 import Attendance from "../schemas/AttendanceSchema.js";
 import * as Helper from "../helpers/Helpers.js";
 import * as CONSTANTS from "../constants/CONSTANTS.js";
+import CheckInOutLogs from "../schemas/CheckInOutLogs.js";
 
 const ERRORS = CONSTANTS.ERRORS;
 export const upsertUserAttendence = async (postData) => {
@@ -49,6 +50,33 @@ export const getAttendenceByDate = async(postData)=> {
         console.log(error.message);
     }
     return response;
+}
+
+export const getUserAttendenceList = async(userId) => {
+    let response;
+    let data = [];
+    try {
+        let attendance = await Attendance.find({user_id  : userId}).sort({date : -1});
+        data =await Promise.all( attendance.map( async(value) => {
+            const log = await CheckInOutLogs.find({user_id : userId , date : value.date});
+            let total = 0;
+            log.map( value => {
+                total += value.total;
+            })
+            value = {
+                ...value._doc , 
+                check_in : Helper.formatDateTimeToTime(log[0].check_in),
+                check_out : Helper.formatDateTimeToTime(log[log.length - 1].check_out),
+                total : Helper.msToHMS(total)
+            }
+            return value;
+        }));
+        console.log(data);
+        response = {status : true , data: data , code : 200}
+    } catch(error) {
+        response = {status : false , error : error.message , code : 500 , msg : ERRORS.ERR1000.msg , errCode : ERRORS.ERR1000.code , data : []}
+    }
+    return response ;
 }
 
 

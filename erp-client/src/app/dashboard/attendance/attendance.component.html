@@ -8,7 +8,7 @@
             <li class="attendance-nav-item" [class.nav-active]="toggleTab == 2" (click)="toggleTab = 2;loadAttendance()">View Attendance</li>
         </ul>
     </div>
-    <div class="attendance-main">
+    <div class="attendance-main" *ngIf="toggleTab == 1">
         <div class="check-in-out-panel show-panel" *ngIf="toggleTab == 1">
             <img src={{user.profile_image}} alt="" class="profile-image">
             <div class="user-name">{{user.name}}</div>
@@ -26,6 +26,8 @@
                 </span>
             </div>
         </div>
+    </div>
+    <div class="view-attendance-main">
         <app-view-attendance *ngIf="toggleTab == 2"></app-view-attendance>
     </div>
 </div>

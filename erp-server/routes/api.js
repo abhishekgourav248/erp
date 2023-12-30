@@ -7,7 +7,7 @@ import authenticate from "../middlewares/Authenticate.js";
 const router = express.Router();
 // get routes -----------------------------------------------------------------------------------------------------------------------------------------
 router.get('/get_user_details' , authenticate , UserController.getUserDetails);
-router.get('/get_user_attendance_list',authenticate,UserController.getUserAttendenceList);
+router.get('/get_user_attendance_list',authenticate,AttendanceController.getUserAttendenceList);
 
 
 //post routes -----------------------------------------------------------------------------------------------------------------------------------------

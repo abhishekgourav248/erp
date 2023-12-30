@@ -1,10 +1,11 @@
 import createLogger from "../Logger/logger.js";
 import * as UserModel from "../models/UserModel.js";
+import * as CONSTANTS from "../constants/CONSTANTS.js";
 import * as CheckInOutModel from "../models/CheckInOutModel.js";
 import * as AttendanceModel from "../models/AttendanceModel.js";
 
 const logger = createLogger("AttendanceController");
-
+const ERRORS = CONSTANTS.ERRORS;
 export const upsertUserAttendence = async(req,res) => {
     let response = {};
     logger.log("info" , "===============================LOG START==============================");
@@ -72,5 +73,30 @@ export const upsertUserAttendence = async(req,res) => {
     }
     logger.log("info" , `===FINAL RESPONSE=== > ${JSON.stringify(response)}`);
     logger.log("info" , "================================LOG END===============================");
+    return res.status(response.code).json(response);
+}
+
+export const getUserAttendenceList = async(req,res)=>{
+    let response ;
+    try {
+        const {user_id} = req.query;
+        const attendance = await AttendanceModel.getUserAttendenceList(user_id);
+        response =  {
+            status : attendance.status,
+            data : attendance.data,
+            code : attendance.code
+        }
+        if(attendance.hasOwnProperty('errCode')) {
+            response = {...response , errCode : attendance.errCode}
+        }
+        if(attendance.hasOwnProperty('error')) {
+            response = {...response , error : attendance.error}
+        }
+        if(attendance.hasOwnProperty('errMsg')) {
+            response = {...response , errMsg : attendance.errMsg}
+        }
+    }catch (error) {
+        response = {status : false , error : error.message , code : 500 , msg : ERRORS.ERR1000.msg , errCode : ERRORS.ERR1000.code , data : []}
+    }
     return res.status(response.code).json(response);
 }

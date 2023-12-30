@@ -22,7 +22,3 @@ export const getUserDetails = async (req,res) => {
     logger.log("info" , "================================LOG END===============================");
     return res.status(response.code).json(response);
 }
-
-export const getUserAttendenceList = async(req,res)=>{
-    
-}

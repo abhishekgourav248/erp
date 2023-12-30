@@ -8,7 +8,7 @@ import axios from 'axios';
   styleUrl: './view-attendance.component.css'
 })
 export class ViewAttendanceComponent implements OnInit{
-  attendence : any = []
+  attendance : any = []
   baseURL : string;
   userId : any;
   token : any;
@@ -20,11 +20,20 @@ export class ViewAttendanceComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    axios.get(`${this.baseURL}/get_user_attendance_list`).then( (response)=> {
+    axios.get(`${this.baseURL}/get_user_attendance_list`,
+      {
+        params : {
+          user_id : this.userId
+        },
+        headers : {
+          Authorization : `Bearer ${this.token}`
+        }
+      }
+    ).then( (response)=> {
       if(response.data.status) {
-        this.attendence = response.data.data;
+        this.attendance = response.data.data;
       }else{
-        this.attendence = [];
+        this.attendance = [];
         this.noData = true;
       }
     }).catch( (error)=> {

@@ -78,3 +78,26 @@ export const getDate = (formatType=1) => {
         default : return date_ymd;
     }
 }
+
+export const formatDateTimeToTime = (dateTime) => {
+    const dateTimeObj = new Date(dateTime);
+
+    const formattedTime = dateTimeObj.toLocaleTimeString(dateTimeObj);
+
+    return formattedTime ;
+
+}
+
+export const msToHMS = (ms) => {
+    // 1 second = 1000 milliseconds
+    // 1 minute = 60 seconds
+    // 1 hour = 60 minutes
+
+    const seconds = Math.floor(ms / 1000) % 60;
+    const minutes = Math.floor(ms / (1000 * 60)) % 60;
+    const hours = Math.floor(ms / (1000 * 60 * 60));
+
+    const time = `${hours<10 ? '0'+hours : hours}h ${minutes < 10 ? '0'+minutes : minutes}m ${seconds < 10 ? '0'+seconds : seconds}s`;
+
+    return time;
+}

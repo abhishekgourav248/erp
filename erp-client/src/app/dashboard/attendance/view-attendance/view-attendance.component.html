@@ -1,1 +1,18 @@
-<p>view-attendance works!</p>
+<div class="view-attendance">
+    <div class="search"></div>
+    <table class="table">
+        <tr>
+            <th>Date</th>
+            <th>Check In</th>
+            <th>Check Out</th>
+            <th>Total Work Hours</th>
+        </tr>
+
+        <tr *ngFor = "let data of attendance">
+            <td>{{data.date}}</td>
+            <td>{{data.check_in}}</td>
+            <td>{{data.check_out}}</td>
+            <td>{{data.total}}</td>
+        </tr>
+    </table>
+</div>

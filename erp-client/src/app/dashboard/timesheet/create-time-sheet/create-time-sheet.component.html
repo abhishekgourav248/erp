@@ -3,18 +3,18 @@
         <div class="col-2">
             <div class="row">
                 <label for="">Date</label>
-                <input type="date" name="date" id="date" [class.error] = "empty_date == 1" (input)="handleInput($event)" [min] = "minDate" [max]="maxDate">
+                <input type="date" name="date" id="date" [class.error] = "empty_date == 1" (input)="handleInput($event)" [min] = "minDate" [max]="maxDate" [value]="timesheet.date">
             </div>
             <div class="row">
                 <label for="">Hours</label>
-                <input type="text" name="hours" id="hours" pattern="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" [class.error] = "empty_hours == 1"  placeholder="08:00" (input)="handleInput($event)">
+                <input type="text" name="hours" id="hours" pattern="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" [class.error] = "empty_hours == 1"  placeholder="08:00" (input)="handleInput($event)" [value]="timesheet.hours">
             </div>
         </div>
         <div class="col-2">
             <div class="row">
                 <label for="">Project</label>
-                <select name="project" id="" (change)="handleSelect($event)" [class.error] = "empty_project == 1" >
-                    <option value="1">Miscellaneous</option>
+                <select name="project" id="" (change)="handleSelect($event)" [class.error] = "empty_project == 1" [value]="timesheet.project">
+                    <option selected value="Miscellaneous">Miscellaneous</option>
                 </select>
             </div>
             <!-- <div class="row-checkbox">
@@ -27,12 +27,12 @@
                 <label for="">
                     Task
                 </label>
-                <textarea name="task" id="" cols="30" rows="10" (input)="handleTextArea($event)" [class.error] = "empty_task == 1" ></textarea>
+                <textarea name="task" id="" cols="30" rows="10" (input)="handleTextArea($event)" [class.error] = "empty_task == 1" [value]="timesheet.task"></textarea>
             </div>
         </div>
         <div class="btn-grp">
             <button type="button" class="btn save-btn" (click)="handleSave()">Save</button>
-            <button type="button" class="btn cancel-btn">Cancel</button>
+            <button type="button" class="btn cancel-btn" (click)="goBack()">Cancel</button>
         </div>
         </form>
 </div>

@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { env } from '../../../../env';
-import axios from 'axios';
-import { Router } from '@angular/router';
+import axios, { Axios } from 'axios';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-time-sheet',
   templateUrl: './create-time-sheet.component.html',
   styleUrl: './create-time-sheet.component.css'
 })
-export class CreateTimeSheetComponent {
+export class CreateTimeSheetComponent implements OnInit {
   private payload : any  = {};
   empty_date : number    = 0;
   empty_hours : number   = 0;
@@ -19,7 +19,10 @@ export class CreateTimeSheetComponent {
   userId : string | null = "";
   minDate : any = "";
   maxDate : any = "";
-  constructor(private router : Router) {
+  timesheet_id : string | null = null;
+  timesheet : any ;
+
+  constructor(private router : Router , private route : ActivatedRoute) {
     this.baseURL = env.apiURL;
     this.token = localStorage.getItem('token');
     this.userId = localStorage.getItem('user_id');
@@ -31,6 +34,42 @@ export class CreateTimeSheetComponent {
     this.minDate = currentDate.toISOString().split('T')[0];
     currentDate.setDate(currentDate.getDate()+1);
     this.maxDate = currentDate.toISOString().split('T')[0];
+    this.timesheet = {
+      date : "",
+      hours : "",
+      project : "",
+      task : ""
+    }
+  }
+
+  ngOnInit(): void {
+    this.route.queryParams.subscribe( (params)  => {
+      this.timesheet_id = params['id'];
+    })
+    if (this.timesheet_id) {
+      this.getTimesheetData();
+      this.payload = {_id : this.timesheet_id};
+    }
+  }
+
+  getTimesheetData() : void {
+    let getPayload = {
+      params : {
+        timesheet_id : this.timesheet_id
+      },
+      headers : {
+        Authorization : `Bearer ${this.token}`
+      }
+    }
+
+    axios.get(`${this.baseURL}/get_timesheet_details`,getPayload).then(response => {
+      if(response.data.data) {
+        this.timesheet = response.data.data;
+        this.timesheet.task = this.timesheet.task.replace(/<br \/>/g , '\n');
+      }
+    }).catch (error => {
+
+    })
   }
 
   handleInput(event : Event) {
@@ -76,9 +115,13 @@ export class CreateTimeSheetComponent {
       }
     ).then( (response)=> {
       alert("Timesheet updated successfully.");
-      this.router.navigate(['./dashboard/timesheet']);
+      this.goBack();
     }).catch(error => {
       alert('failed to creat or update time sheet')
     })
+  }
+
+  goBack() {
+    this.router.navigate(['./dashboard/timesheet'])
   }
 }

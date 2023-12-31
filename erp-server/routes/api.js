@@ -8,6 +8,8 @@ const router = express.Router();
 // get routes -----------------------------------------------------------------------------------------------------------------------------------------
 router.get('/get_user_details' , authenticate , UserController.getUserDetails);
 router.get('/get_user_attendance_list',authenticate,AttendanceController.getUserAttendenceList);
+router.get('/get_user_timesheets', UserController.getUserTimeSheets);
+router.get('/get_timesheet_details', UserController.getTimesheetDetails);
 
 
 //post routes -----------------------------------------------------------------------------------------------------------------------------------------

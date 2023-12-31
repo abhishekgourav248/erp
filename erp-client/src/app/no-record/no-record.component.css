@@ -1,0 +1,15 @@
+.no-record-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.no-data-icon {
+    width: 240px;
+}
+
+.no-data-text {
+    color: var(--main-accent-color-70);
+    font-size: 2em;
+}

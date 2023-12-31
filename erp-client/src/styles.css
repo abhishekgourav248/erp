@@ -3,6 +3,8 @@
 :root {
     --main-accent-color : #4169E1;
     --secondary-accent-color : #8DA5ED;
+    --secondary-accent-color-green : #A7BFA1;
+    --secondary-accent-color-red :  #D98181;
     --main-accent-color-90  : rgba(65, 105, 225, 0.9); 
     --main-accent-color-80  : rgba(65, 105, 225, 0.8); 
     --main-accent-color-70  : rgba(65, 105, 225, 0.7); 

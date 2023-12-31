@@ -1,0 +1,28 @@
+<div class="view-timesheet-container">
+    <div class="add-timesheet">
+        <button type="button" class="add-timesheet-btn" routerLink="./create">
+            Create
+        </button>
+    </div>
+    <div class="view-timesheet" *ngIf = "noRecords == false">
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Project</th>
+                <th>Work hours</th>
+                <th>Action</th>
+            </tr>
+            <tr *ngFor="let timesheet of timesheets">
+                <td>{{timesheet.date}}</td>
+                <td>{{timesheet.project}}</td>
+                <td>{{timesheet.hours}}</td>
+                <td class="action">
+                    <i class="fa-solid fa-pencil" (click)="handleEdit(timesheet._id)"></i>
+                    <i class="fa-solid fa-envelope" (click)="handleSendMail(timesheet._id)"></i>
+                    <i class="fa-solid fa-eraser" (click)="handleDelete(timesheet._id)"></i>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <app-no-record *ngIf = "noRecords == true"></app-no-record>
+</div>

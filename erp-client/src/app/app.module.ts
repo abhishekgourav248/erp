@@ -9,6 +9,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CommonModule } from '@angular/common';
 import { AttendanceComponent } from './dashboard/attendance/attendance.component';
 import { ViewAttendanceComponent } from './dashboard/attendance/view-attendance/view-attendance.component';
+import { TimesheetComponent } from './dashboard/timesheet/timesheet.component';
+import { ViewTimeSheetComponent } from './dashboard/timesheet/view-time-sheet/view-time-sheet.component';
+import { CreateTimeSheetComponent } from './dashboard/timesheet/create-time-sheet/create-time-sheet.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { ViewAttendanceComponent } from './dashboard/attendance/view-attendance/
     RegisterComponent,
     DashboardComponent,
     AttendanceComponent,
-    ViewAttendanceComponent
+    ViewAttendanceComponent,
+    TimesheetComponent,
+    ViewTimeSheetComponent,
+    CreateTimeSheetComponent
   ],
   imports: [
     BrowserModule,

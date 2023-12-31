@@ -1,0 +1,38 @@
+<div class="create-timesheet-container">
+    <form>
+        <div class="col-2">
+            <div class="row">
+                <label for="">Date</label>
+                <input type="date" name="date" id="date" [class.error] = "empty_date == 1" (input)="handleInput($event)" [min] = "minDate" [max]="maxDate">
+            </div>
+            <div class="row">
+                <label for="">Hours</label>
+                <input type="text" name="hours" id="hours" pattern="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" [class.error] = "empty_hours == 1"  placeholder="08:00" (input)="handleInput($event)">
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="row">
+                <label for="">Project</label>
+                <select name="project" id="" (change)="handleSelect($event)" [class.error] = "empty_project == 1" >
+                    <option value="1">Miscellaneous</option>
+                </select>
+            </div>
+            <!-- <div class="row-checkbox">
+                <input type="checkbox" name="blocker" id="" (input)="handleInput($event)">
+                <label for="">Mark as blocker</label>
+            </div> -->
+        </div>
+        <div class="col-1">
+            <div class="row-text-area">
+                <label for="">
+                    Task
+                </label>
+                <textarea name="task" id="" cols="30" rows="10" (input)="handleTextArea($event)" [class.error] = "empty_task == 1" ></textarea>
+            </div>
+        </div>
+        <div class="btn-grp">
+            <button type="button" class="btn save-btn" (click)="handleSave()">Save</button>
+            <button type="button" class="btn cancel-btn">Cancel</button>
+        </div>
+        </form>
+</div>

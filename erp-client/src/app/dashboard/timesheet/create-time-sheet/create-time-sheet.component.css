@@ -1,0 +1,91 @@
+.col-2 {
+    width: fit-content;
+    display:  grid;
+    grid-template-columns: repeat(2,400px);
+}
+.row > label {
+    margin-right: 1em;
+    display: flex;
+    align-self: center;
+}
+
+.row {
+    display: grid;
+    margin-bottom: 1em;
+    grid-template-columns: 100px 200px;
+}
+
+input , select {
+    width: 100%;
+    font-size: 1em;
+    padding: 0.5em 1em;
+    border: 2px solid var(--main-input-border-accent-30);
+    border-radius: 1em;
+}
+
+input[type='checkbox'] {
+    width: fit-content;
+    margin-right: 1em;
+}
+
+input:focus ,select:focus {
+    outline: none;
+    border-color: var(--main-input-border-accent-90);
+}
+
+.row-checkbox {
+    height: fit-content;
+    padding: 0.5em 1em;
+    margin-bottom: 1em;
+    display: flex;
+    align-items: center;
+}
+.row-text-area {
+    display: flex;
+    flex-direction: column;
+
+}
+.row-text-area > label {
+    margin-bottom: 0.5em;
+}
+textarea {
+    resize: none;
+    max-width: 700px;
+    min-height: 400px;
+    padding: 1em;
+    border: 2px solid var(--main-input-border-accent-30);
+    border-radius: 1em;
+    font-size: 1.2em;
+    overflow-y: scroll;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--main-input-border-accent-90);
+}
+
+.btn-grp {
+    margin-top: 1em;
+    width: fit-content;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 1em;
+}
+.btn {
+    
+    width: 64px;
+    padding: 0.5em 0em;
+    border: none;
+    border-radius: 1em;
+    color: white;
+}
+.save-btn {
+    background-color: var(--main-accent-color-60);
+}
+.cancel-btn {
+    background-color: tomato ;
+}
+
+.error {
+    border-color: rgba(255, 99, 71, 0.616);
+}

@@ -75,3 +75,82 @@ export const getTimesheetDetails = async (req,res) => {
     logger.log("info" , "================================LOG END===============================");
     return res.status(response.code).json(response);
 }
+
+export const getUsers = async(req,res) => {
+    logger.log("info" , "===============================LOG START GET_USERS==============================");
+    logger.log("info" , `===Payload=== > ${JSON.stringify(req.query)}`);
+    let response = {};
+    try {
+        const users = await UserModel.getUsers(req.query.search_text);
+        response = {...users};
+    } catch (error) {
+        response = {status : false , code : 500 , error : "Something went wrong"};
+    }
+    logger.log("info" , `===FINAL RESPONSE=== > ${JSON.stringify(response)}`);
+    logger.log("info" , "================================LOG END===============================");
+    return res.status(response.code).json(response);
+}
+
+
+export const saveTimesheetMail = async (req,res) => {
+    logger.log("info" , "===============================LOG START GET_USERS==============================");
+    logger.log("info" , `===Payload=== > ${JSON.stringify(req.body)}`);
+    let response = {};
+    let validationError = false;
+    let errMsg = [];
+    let to_list = [];
+    let cc_list = [];
+    let message = "";
+    try {
+        //validation
+        const {timesheet_id , user_id , to ,cc,subject} = req.body;
+        if(!timesheet_id) {
+            validationError= true;
+            errMsg.push("timesheet_id is a required field");
+        }
+        if(!user_id) {
+            validationError= true;
+            errMsg.push("user_id is a required field");
+        }
+        if(!to) {
+            validationError= true;
+            errMsg.push("to is a required field");
+        }
+        if(!subject) {
+            validationError= true;
+            errMsg.push("subject is a required field");
+        }
+        
+        to.forEach(async (data) => {
+            let email = (await UserModel.getUserMail(data.user_id)).email;
+            to_list.push(email);
+        });
+        cc.forEach(async (data) => {
+            let email = (await UserModel.getUserMail(data.user_id)).email;
+            cc_list.push(email);
+        });
+        let timesheetDetails = await TimeSheetsModel.getTimeSheetDetails(req.body);
+        if(timesheetDetails.status) {
+            message = `Status update mail for project : ${timesheetDetails.data.project}\nDuration : ${timesheetDetails.data.hours}\nPlease find below the list of tasks worked upon for today :\n${timesheetDetails.data.task}`;
+        }
+        const previousMailDetails = await TimeSheetsModel.getTimesheetMail(timesheet_id) ;
+        let postData = {
+            _id : previousMailDetails.status ? previousMailDetails.data._id : null,
+            from : (await UserModel.getUserMail(user_id)).email,
+            to : Array.from(new Set(to_list)),
+            cc : Array.from(new Set(cc_list)),
+            subject : subject,
+            message : message,
+            timesheet_id : timesheet_id
+        }
+
+        const result = await TimeSheetsModel.saveTimesheetMail(postData);
+        
+        response = {...result};
+    } catch (error) {
+        response = {status : false , code : 500 , error : "Something went wrong"};
+    }
+    logger.log("info" , `===FINAL RESPONSE=== > ${JSON.stringify(response)}`);
+    logger.log("info" , "================================LOG END===============================");
+    return res.status(response.code).json(response);
+}

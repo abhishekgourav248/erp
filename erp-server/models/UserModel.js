@@ -48,3 +48,36 @@ export const updateUserAttendence = async (postData) => {
     }
     return response;
 }
+
+export const getUsers = async (search_text) => {
+    let response = {};
+    try {
+        let data = [];
+        if(search_text.trim() !== ""){
+            data = await User.find({name : {$regex : new RegExp(search_text , "i")}});
+        }
+        if(data) {
+            response = {status : true , code : 200 , data : data};
+        }else {
+            response = {status : true , code : 200 , data : []};
+        }
+    } catch (error) {
+        response = {status :false , code : 500 , error : error.message ,msg : "Something went wrong" };
+    }
+    return response;
+}
+
+export const getUserMail = async (userId) => {
+    let response = {}
+    try {
+        const data = await User.findOne({user_id : userId});
+        if(data) {
+            response = {status : true , email : data.email}
+        }else {
+            response = {status : false , email : ""};
+        }
+    } catch (error) {
+        response = {status : false , email: "" , error : error.message}
+    }
+    return response;
+}

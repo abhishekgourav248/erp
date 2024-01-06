@@ -1,0 +1,57 @@
+<div class="mail-timesheet-container">
+    <form class="form">
+        <div class="row">
+            <label for="">To</label>
+            <div class="input-field">
+                <div class="selected" *ngFor="let data of send_to">
+                    <div class="user">
+                        {{data.name}}
+                        <i class="fa-solid fa-circle-xmark" (click)="removeUserFromSendTo(data.user_id)"></i>
+                    </div>
+                </div>
+                <div class="field">
+                    <input type="text" id="send-to-field" #inputElement list="send-to-list" (change)="handleSendToPayload(inputElement.value)" (input) = "onInput($event)" autocomplete="off">
+                    <datalist id="send-to-list" *ngFor = "let user of user_list">
+                        <option value={{user.user_id}}>{{user.name}}</option>
+                    </datalist>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label for="">Cc</label>
+            <div class="input-field">
+                <div class="selected" *ngFor="let data of cc_to">
+                    <div class="user">
+                        {{data.name}}
+                        <i class="fa-solid fa-circle-xmark" (click)="removeUserFromCcTo(data.user_id)"></i>
+                    </div>
+                </div>
+                <div class="field">
+                    <input type="text" id="cc-to-field" #ccElement list="send-to-list" (change)="handleCCPayload(ccElement.value)" (input) = "onInput($event)" autocomplete="off">
+                    <datalist id="cc-to-list" *ngFor = "let user of user_list">
+                        <option value={{user.user_id}}>{{user.name}}</option>
+                    </datalist>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <label for="">Subject</label>
+            <input type="text" name="subject" class="subject-field" (input)="handlePayload($event)">
+        </div>
+        <div class="row">
+            <label for="">Message</label>
+            <div class="mail-body">
+                <p>Status update mail for project <b>{{timesheet.project}}</b></p>
+                <p>Worked for : <b>{{timesheet.hours}}</b></p>
+                <p>Please find below the list of completed tasks for today : </p>
+                <div *ngFor="let task of timesheet.task.split('<br />')">{{task}}</div>
+            </div>
+        </div>
+
+        <div class="btn-grp">
+            <button type="button" class="btn send-mail" (click)="handleSendMail()">Send</button>
+            <button type="button" class="btn go-back">Cancel</button>
+        </div>
+    </form>
+</div>

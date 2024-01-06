@@ -56,7 +56,7 @@ export const getUserAttendenceList = async(userId) => {
     let response;
     let data = [];
     try {
-        let attendance = await Attendance.find({user_id  : userId}).sort({date : -1});
+        let attendance = await Attendance.find({user_id  : userId}).sort({created_at : -1});
         data =await Promise.all( attendance.map( async(value) => {
             const log = await CheckInOutLogs.find({user_id : userId , date : value.date});
             let total = 0;

@@ -7,6 +7,7 @@ import { AttendanceComponent } from './dashboard/attendance/attendance.component
 import { TimesheetComponent } from './dashboard/timesheet/timesheet.component';
 import { ViewTimeSheetComponent } from './dashboard/timesheet/view-time-sheet/view-time-sheet.component';
 import { CreateTimeSheetComponent } from './dashboard/timesheet/create-time-sheet/create-time-sheet.component';
+import { MailTimesheetComponent } from './dashboard/timesheet/mail-timesheet/mail-timesheet.component';
 
 const routes: Routes = [
   {path:"", redirectTo: '/dashboard', pathMatch: 'full' },
@@ -17,7 +18,8 @@ const routes: Routes = [
     ]},
     {path : "timesheet", component:TimesheetComponent , children : [
       {path : "" , component: ViewTimeSheetComponent },
-      {path : "create",component : CreateTimeSheetComponent}
+      {path : "create",component : CreateTimeSheetComponent},
+      {path : "mail_timesheet/:id" , component : MailTimesheetComponent},
     ]}
   ]},
 ];

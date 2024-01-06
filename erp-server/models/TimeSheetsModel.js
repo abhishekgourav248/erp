@@ -1,5 +1,6 @@
 import TimeSheets from "../schemas/TimeSheetSchema.js";
 import * as CONSTANTS from "../constants/CONSTANTS.js";
+import TimeSheetEmail from "../schemas/TimesheetEmailSchema.js";
 
 const ERRORS = CONSTANTS.ERRORS;
 export const upsertTimeSheet = async (postData) => {
@@ -53,6 +54,42 @@ export const getTimeSheetDetails = async (postData) => {
             response = {status : true , code : 200 , data : data}
         }else {
             response = {status : true , code : 200 , data : {}}
+        }
+    } catch (error) {
+        response = {status : false , msg : ERRORS.ERR1000.msg , errCode : ERRORS.ERR1000.code , error : error.message, code : 500 ,data : {}};
+    }
+    return response;
+}
+
+export const getTimesheetMail = async (timesheetId) => {
+    let response = {} ;
+    try {
+        const data = await TimeSheetEmail.findOne({timesheet_id : timesheetId});
+        if(data) {
+            response = {status : true , data : data , code : 200};
+        }else {
+            response = {status : false , data : {} , code : 200};
+        }
+    } catch (error) {
+        response = {status : false , msg : ERRORS.ERR1000.msg , errCode : ERRORS.ERR1000.code , error : error.message, code : 500};
+    }
+    return response;
+}
+
+export const saveTimesheetMail = async (postData) => {
+    let response = {status :false , data : {} , code : 400};
+    try {
+        if(postData._id) {
+            const update = await TimeSheetEmail.findOneAndUpdate({_id : postData._id} , postData , {new:true});
+            if(update) {
+                response = {status : true , data : update , code : 200}
+            }
+        } else {
+            delete postData._id;
+            const save = await TimeSheetEmail.create(postData);
+            if(save) {
+                response = {status : true , data : save , code : 200}
+            }
         }
     } catch (error) {
         response = {status : false , msg : ERRORS.ERR1000.msg , errCode : ERRORS.ERR1000.code , error : error.message, code : 500};

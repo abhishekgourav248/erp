@@ -42,7 +42,7 @@ export class ViewTimeSheetComponent implements OnInit {
     this.router.navigate(['./dashboard/timesheet/create'],{queryParams :{id : id}});
   }
   handleSendMail(id : any) : void {
-
+    this.router.navigate(['./dashboard/timesheet/mail_timesheet',id]);
   }
   handleDelete(id : any) : void {
 

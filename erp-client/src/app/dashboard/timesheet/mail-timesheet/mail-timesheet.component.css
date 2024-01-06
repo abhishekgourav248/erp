@@ -1,0 +1,77 @@
+.mail-timesheet-container {
+    width: 100%;
+    height: fit-content;
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    margin-top: 2em;
+}
+
+label {
+    margin-left: 1em;
+}
+
+.input-field {
+    margin-top: 0.3em;
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--main-accent-color-60);
+    padding: 1em;
+    border-radius: 1em;
+}
+
+.user {
+    background-color: var(--main-accent-color-30);
+    padding: 0.5em;
+    border-radius: 1em;
+}
+
+.fa-circle-xmark {
+    margin-left: 0.5em;
+}
+
+input {
+    border: none;
+    outline: none;
+    font-size: 1.5em;
+}
+
+.subject-field {
+    border: 2px solid var(--main-accent-color-60);
+    padding: 0.6em;
+    border-radius: 1em;
+    min-width: 40em;
+    overflow-x: scroll;
+}
+
+.btn-grp {
+    margin-top: 1em;
+    width: fit-content;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 1em;
+}
+
+.btn {
+    
+    width: 64px;
+    padding: 0.5em 0em;
+    border: none;
+    border-radius: 1em;
+    color: white;
+}
+
+.send-mail {
+    background-color: var(--main-accent-color-60);
+}
+
+.go-back {
+    background-color: tomato ;
+}
+
+.mail-body {
+    padding: 1em;
+}

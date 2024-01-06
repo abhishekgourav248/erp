@@ -13,6 +13,7 @@ import { TimesheetComponent } from './dashboard/timesheet/timesheet.component';
 import { ViewTimeSheetComponent } from './dashboard/timesheet/view-time-sheet/view-time-sheet.component';
 import { CreateTimeSheetComponent } from './dashboard/timesheet/create-time-sheet/create-time-sheet.component';
 import { NoRecordComponent } from './no-record/no-record.component';
+import { MailTimesheetComponent } from './dashboard/timesheet/mail-timesheet/mail-timesheet.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { NoRecordComponent } from './no-record/no-record.component';
     TimesheetComponent,
     ViewTimeSheetComponent,
     CreateTimeSheetComponent,
-    NoRecordComponent
+    NoRecordComponent,
+    MailTimesheetComponent
   ],
   imports: [
     BrowserModule,

@@ -65,7 +65,7 @@ export class CreateTimeSheetComponent implements OnInit {
     axios.get(`${this.baseURL}/get_timesheet_details`,getPayload).then(response => {
       if(response.data.data) {
         this.timesheet = response.data.data;
-        this.timesheet.task = this.timesheet.task.replace(/<br \/>/g , '\n');
+        this.timesheet.task = this.timesheet.task;
       }
     }).catch (error => {
 
@@ -105,7 +105,7 @@ export class CreateTimeSheetComponent implements OnInit {
   }
 
   handleSave() {
-    this.payload.task = this.payload.task.replace(/\n/g,'<br />')
+    this.payload.task = this.payload.task;
     this.payload = {...this.payload , user_id : this.userId};
     axios.post(`${this.baseURL}/upsert_timesheet` , this.payload,
       {

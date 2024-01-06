@@ -10,6 +10,7 @@ router.get('/get_user_details' , authenticate , UserController.getUserDetails);
 router.get('/get_user_attendance_list',authenticate,AttendanceController.getUserAttendenceList);
 router.get('/get_user_timesheets', UserController.getUserTimeSheets);
 router.get('/get_timesheet_details', UserController.getTimesheetDetails);
+router.get('/get_users',UserController.getUsers);
 
 
 //post routes -----------------------------------------------------------------------------------------------------------------------------------------
@@ -17,5 +18,6 @@ router.post("/login",AuthController.loginUser);
 router.post("/register",AuthController.registerUser);
 router.post("/upsert_user_attendance",authenticate,AttendanceController.upsertUserAttendence);
 router.post('/upsert_timesheet',authenticate,UserController.upsertTimeSheet);
+router.post('/send_timesheet_mail',authenticate,UserController.saveTimesheetMail);
 
 export default router;
